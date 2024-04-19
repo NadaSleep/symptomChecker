@@ -27,29 +27,34 @@ namespace Graphics {
 namespace Program {
   class SymptomChecker {  
   public:
-  int covid19 = 0, cold = 0, flu  = 0;   
+  int covid19 = 0;   
+  int cold = 0;
+  int flu = 0;
+  int patients = 0;
+
     void symptomGenerator(int patients) {
       srand(time(nullptr));
-      for (int i = 0; i < patients; i++) {
-        int fever = rand() % 2;
-        int cough = rand() % 2;
-        int shortnessOfBreath = rand() % 2;
-        int runnyNose = rand() % 2;
-        int headaches = rand() % 2;
-        int sneezing = rand() % 2;
-        int fatigue = rand() % 2;
+      for (int i = 0; i < patients; i++) {        
+        bool fever = rand() % 2 == 1;
+        bool cough = rand() % 2 == 1;
+        bool shortnessOfBreath = rand() % 2 == 1;
+        bool runnyNose = rand() % 2 == 1;
+        bool headaches = rand() % 2 == 1;
+        bool sneezing = rand() % 2 == 1;
+        bool fatigue = rand() % 2 == 1;
 //Covid-19 check          
-          if(fever == 1 && cough == 1 && shortnessOfBreath == 1 && sneezing == 0) {
+          if(fever == true && cough == true && shortnessOfBreath == true && sneezing == false) {
             covid19++;
           }   
 //Cold check
-          if(shortnessOfBreath == 0 && runnyNose == 1 && sneezing == 1) {
+          if(shortnessOfBreath == false && runnyNose == true && sneezing == true) {
             cold++;
           }
 //Flu check
-          if(fever == 1 && cough == 1 && shortnessOfBreath == 0 && headaches == 1 && sneezing == 0 && fatigue == 1) {
+          if(fever == true && cough == true && shortnessOfBreath == false && headaches == true && sneezing == false && fatigue == true) {
             flu++;
           }
+        //fever = 0, cough = 0, shortnessOfBreath = 0, runnyNose = 0, headaches = 0, sneezing = 0, fatigue = 0;
    }      
   }     
  };  
@@ -57,26 +62,19 @@ namespace Program {
 
 int main(void)
 {
-int covid19, cold, flu, patients;
+int patients;
 Graphics::Table newTable;
 newTable.displayTable();
 
-cout << "patient number?" << endl;
+cout << "What is the number of patients?" << endl;
 cin >> patients;
 
 Program::SymptomChecker newSymptomChecker;
 newSymptomChecker.symptomGenerator(patients);
 
-cout << covid19 << endl;
-cout << cold << endl;
-cout << flu << endl;
-
-
-
-
-
-
-
+cout <<"COVID-19: "<< newSymptomChecker.covid19 << endl;
+cout <<"COLD: "<< newSymptomChecker.cold << endl;
+cout <<"FLU: "<< newSymptomChecker.flu << endl;
 
 return 0;
 }
