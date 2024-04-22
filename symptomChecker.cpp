@@ -27,7 +27,7 @@ namespace Graphics {
   public:
 
   void displayPercent(int percentNum) {
-     int percentVisual = percentNum/10;
+     int percentVisual = percentNum/1;
         for (int i = 0; i < percentVisual; i++) {
         cout<<"+";
    }
@@ -101,12 +101,14 @@ cout <<"FLU: "<< newSymptomChecker.flu << endl;
 cout <<"Other Illness: "<< otherIllness << endl;
 cout <<"--------------------------------"<< endl;
 
+Graphics::PercentVisual percentGraphics;
+
 cout <<"Percentage of each Illness:"<< endl;
 cout <<"---------------------------"<< endl;
-cout <<"COVID-19:          "<<"["<<newSymptomChecker.percent(newSymptomChecker.covid19)<<"%"<<"]"<< endl;
-cout <<"COLD:              "<<"["<<newSymptomChecker.percent(newSymptomChecker.cold)<<"%"<<"]"<< endl;
-cout <<"FLU:               "<<"["<<newSymptomChecker.percent(newSymptomChecker.flu)<<"%"<<"]"<< endl;
-cout <<"Other Illness:     "<<"["<<newSymptomChecker.percent(otherIllness)<<"%"<<"]"<< endl;
+cout  <<"COVID-19:          "<<"["<<newSymptomChecker.percent(newSymptomChecker.covid19)<<"%"<<"]";percentGraphics.displayPercent(newSymptomChecker.covid19);
+cout << endl <<"COLD:              "<<"["<<newSymptomChecker.percent(newSymptomChecker.cold)<<"%"<<"]";percentGraphics.displayPercent(newSymptomChecker.cold);
+cout << endl <<"FLU:               "<<"["<<newSymptomChecker.percent(newSymptomChecker.flu)<<"%"<<"]";percentGraphics.displayPercent(newSymptomChecker.flu);
+cout << endl <<"Other Illness:     "<<"["<<newSymptomChecker.percent(otherIllness)<<"%"<<"]";percentGraphics.displayPercent(otherIllness);
 
 
 return 0;
