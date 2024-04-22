@@ -22,6 +22,12 @@ namespace Graphics {
            <<"========================================================"<< endl;
   }
  };
+
+//  class PercentVisual : public Table {
+//  public:
+//  void displayPercent()
+//
+// };
 }
 
 namespace Program {
@@ -55,11 +61,17 @@ namespace Program {
           if(fever == true && cough == true && shortnessOfBreath == false && headaches == true && sneezing == false && fatigue == true) {
             flu++;
           }
-        //fever = 0, cough = 0, shortnessOfBreath = 0, runnyNose = 0, headaches = 0, sneezing = 0, fatigue = 0;
    }      
   }     
- };  
-}
+ 
+   int percent(int illness) {
+      int percentNum = illness / patients * 100;
+      return percentNum;
+  }
+ };
+} 
+   
+
 
 int main(void)
 {
@@ -71,13 +83,26 @@ cout << "What is the number of patients?" << endl;
 cin >> patients;
 
 Program::SymptomChecker newSymptomChecker;
+newSymptomChecker.patients = patients;
 newSymptomChecker.symptomGenerator(patients);
 int otherIllness = patients - (newSymptomChecker.covid19 + newSymptomChecker.cold + newSymptomChecker.flu);
 
-cout <<"COVID-19: "<< newSymptomChecker.covid19 << endl;
+cout <<"--------------------------------"<< endl;
+cout <<"Patient Symptoms:"<< endl;
+cout <<"----------------"<< endl;
+cout <<"COVID-19: " << newSymptomChecker.covid19 << endl;
 cout <<"COLD: "<< newSymptomChecker.cold << endl;
 cout <<"FLU: "<< newSymptomChecker.flu << endl;
 cout <<"Other Illness: "<< otherIllness << endl;
+cout <<"--------------------------------"<< endl;
+
+cout <<"Percentage of each Illness:"<< endl;
+cout <<"---------------------------"<< endl;
+cout <<"COVID-19:          "<<"["<<newSymptomChecker.percent(newSymptomChecker.covid19)<<"]"<< endl;
+cout <<"COLD:              "<<"["<<newSymptomChecker.percent(newSymptomChecker.cold)<<"]"<< endl;
+cout <<"FLU:               "<<"["<<newSymptomChecker.percent(newSymptomChecker.flu)<<"]"<< endl;
+cout <<"Other Illness:     "<<"["<<newSymptomChecker.percent(newSymptomChecker.otherIllness)<<"]"<< endl;
+
 
 return 0;
 }
