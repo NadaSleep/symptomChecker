@@ -3,14 +3,16 @@
 #include <cstdlib>
 
 using namespace std; 
-
+// namespace for classes that deal with the visual aspect
 namespace Graphics {
+// Base class
   class Table  {
   public:  
+// Method that displays the table at the start of the program
     void displayTable () {
       cout <<"Guide:       * Common    + Sometimes/Rarely    - NO"<< endl
            <<"========================================================"<< endl
-           <<"|Symptoms                |  COVID-19  |  Cold  |  Flu  |"<< endl
+           <<"|Symptoms                |  COVID-19  |  COLD  |  FLU  |"<< endl
            <<"|======================================================="<< endl
            <<"|Fever                   |      *     |    +   |   *   |"<< endl
            <<"|Cough                   |      *     |    +   |   *   |"<< endl
@@ -23,9 +25,10 @@ namespace Graphics {
   }
  };
 
+// Derived class created from the Table class
   class PercentVisual : public Table {
   public:
-
+// Method used to display "+" for every percent
   void displayPercent(int percentNum) {
      int percentVisual = percentNum/1;
         for (int i = 0; i < percentVisual; i++) {
@@ -35,6 +38,7 @@ namespace Graphics {
  };
 }
 
+// namespace for classes that deal with numbers out of view of the user
 namespace Program {
   class SymptomChecker {  
   public:
@@ -43,7 +47,7 @@ namespace Program {
   int flu = 0;
   int otherIllness = 0;
   int patients = 0;
-
+// Method that randomly generates symptoms for patients
     void symptomGenerator(int patients) {
       srand(time(nullptr));
       for (int i = 0; i < patients; i++) {        
@@ -68,7 +72,7 @@ namespace Program {
           }
    }      
   }     
- 
+// Method that will return a percent for whichever illness
    int percent(int illness) {
       double percentNum = static_cast<double>(illness) / patients * 100;
       return static_cast<int>(percentNum);
@@ -81,17 +85,21 @@ namespace Program {
 int main(void)
 {
 int patients;
+// Creating an object from the Table class
 Graphics::Table newTable;
 newTable.displayTable();
-
+// Taking input from the user for patient amount
 cout << "What is the number of patients?" << endl;
 cin >> patients;
-
+// Creating an object from the SymptomChecker class
 Program::SymptomChecker newSymptomChecker;
+// Assigning value from user to patients of the SymptomChecker object
 newSymptomChecker.patients = patients;
+// Calling the symptomGenerator() method
 newSymptomChecker.symptomGenerator(patients);
+// Creating a variable for Other Illness which will be displayed
 int otherIllness = patients - (newSymptomChecker.covid19 + newSymptomChecker.cold + newSymptomChecker.flu);
-
+// Displayed section for patient symptoms
 cout <<"--------------------------------"<< endl;
 cout <<"Patient Symptoms:"<< endl;
 cout <<"----------------"<< endl;
@@ -100,16 +108,15 @@ cout <<"COLD: "<< newSymptomChecker.cold << endl;
 cout <<"FLU: "<< newSymptomChecker.flu << endl;
 cout <<"Other Illness: "<< otherIllness << endl;
 cout <<"--------------------------------"<< endl;
-
+// Creating an object from the PercentVisual class
 Graphics::PercentVisual percentGraphics;
-
+// Displayed section for illness percentage
 cout <<"Percentage of each Illness:"<< endl;
 cout <<"---------------------------"<< endl;
 cout  <<"COVID-19:          "<<"["<<newSymptomChecker.percent(newSymptomChecker.covid19)<<"%"<<"]";percentGraphics.displayPercent(newSymptomChecker.covid19);
 cout << endl <<"COLD:              "<<"["<<newSymptomChecker.percent(newSymptomChecker.cold)<<"%"<<"]";percentGraphics.displayPercent(newSymptomChecker.cold);
 cout << endl <<"FLU:               "<<"["<<newSymptomChecker.percent(newSymptomChecker.flu)<<"%"<<"]";percentGraphics.displayPercent(newSymptomChecker.flu);
 cout << endl <<"Other Illness:     "<<"["<<newSymptomChecker.percent(otherIllness)<<"%"<<"]";percentGraphics.displayPercent(otherIllness);
-
 
 return 0;
 }
