@@ -23,11 +23,16 @@ namespace Graphics {
   }
  };
 
-//  class PercentVisual : public Table {
-//  public:
-//  void displayPercent()
-//
-// };
+  class PercentVisual : public Table {
+  public:
+
+  void displayPercent(int percentNum) {
+     int percentVisual = percentNum/10;
+        for (int i = 0; i < percentVisual; i++) {
+        cout<<"+";
+   }
+  }
+ };
 }
 
 namespace Program {
@@ -65,8 +70,8 @@ namespace Program {
   }     
  
    int percent(int illness) {
-      int percentNum = illness / patients * 100;
-      return percentNum;
+      double percentNum = static_cast<double>(illness) / patients * 100;
+      return static_cast<int>(percentNum);
   }
  };
 } 
@@ -98,10 +103,10 @@ cout <<"--------------------------------"<< endl;
 
 cout <<"Percentage of each Illness:"<< endl;
 cout <<"---------------------------"<< endl;
-cout <<"COVID-19:          "<<"["<<newSymptomChecker.percent(newSymptomChecker.covid19)<<"]"<< endl;
-cout <<"COLD:              "<<"["<<newSymptomChecker.percent(newSymptomChecker.cold)<<"]"<< endl;
-cout <<"FLU:               "<<"["<<newSymptomChecker.percent(newSymptomChecker.flu)<<"]"<< endl;
-cout <<"Other Illness:     "<<"["<<newSymptomChecker.percent(newSymptomChecker.otherIllness)<<"]"<< endl;
+cout <<"COVID-19:          "<<"["<<newSymptomChecker.percent(newSymptomChecker.covid19)<<"%"<<"]"<< endl;
+cout <<"COLD:              "<<"["<<newSymptomChecker.percent(newSymptomChecker.cold)<<"%"<<"]"<< endl;
+cout <<"FLU:               "<<"["<<newSymptomChecker.percent(newSymptomChecker.flu)<<"%"<<"]"<< endl;
+cout <<"Other Illness:     "<<"["<<newSymptomChecker.percent(otherIllness)<<"%"<<"]"<< endl;
 
 
 return 0;
