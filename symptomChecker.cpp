@@ -30,6 +30,7 @@ namespace Program {
   int covid19 = 0;   
   int cold = 0;
   int flu = 0;
+  int otherIllness = 0;
   int patients = 0;
 
     void symptomGenerator(int patients) {
@@ -71,10 +72,12 @@ cin >> patients;
 
 Program::SymptomChecker newSymptomChecker;
 newSymptomChecker.symptomGenerator(patients);
+int otherIllness = patients - (newSymptomChecker.covid19 + newSymptomChecker.cold + newSymptomChecker.flu);
 
 cout <<"COVID-19: "<< newSymptomChecker.covid19 << endl;
 cout <<"COLD: "<< newSymptomChecker.cold << endl;
 cout <<"FLU: "<< newSymptomChecker.flu << endl;
+cout <<"Other Illness: "<< otherIllness << endl;
 
 return 0;
 }
